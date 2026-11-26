@@ -25,13 +25,13 @@ static const String baseUrl = String.fromEnvironment(
 |---|---|
 | Emulador de Android | `http://10.0.2.2:8080/api` (valor por defecto) |
 | Celular físico en la misma Wi-Fi | `http://192.168.1.10:8080/api` (IP de tu PC) |
-| Render | `https://TU-SERVICIO.onrender.com/api` |
+| Render (producción) | `https://almuerzoservice-valx.onrender.com/api` |
 
 Ejemplos:
 
 ```powershell
 flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8080/api
-flutter build apk --release --dart-define=API_BASE_URL=https://tu-servicio.onrender.com/api
+flutter build apk --release --dart-define=API_BASE_URL=https://almuerzoservice-valx.onrender.com/api
 ```
 
 Para el celular físico, la PC y el teléfono deben estar en la misma red y MySQL debe
@@ -104,7 +104,7 @@ lib/
 ## Instalar en el celular y subir a Git
 
 ```powershell
-flutter build apk --release --dart-define=API_BASE_URL=https://tu-servicio.onrender.com/api
+flutter build apk --release --dart-define=API_BASE_URL=https://almuerzoservice-valx.onrender.com/api
 flutter install   # con el celular conectado por USB y depuración activada
 
 git init
@@ -114,5 +114,12 @@ git remote add origin https://github.com/TU_USUARIO/almuerzoya_app.git
 git push -u origin main
 ```
 
+> En esta entrega el APK release ya está generado en `../app-release.apk` (raíz de la
+> práctica) y en `build/app/outputs/flutter-apk/app-release.apk`, apuntando a
+> `https://almuerzoservice-valx.onrender.com/api`. La URL quedó verificada dentro de
+> `libapp.so` para arm64-v8a, armeabi-v7a y x86_64.
+
 > En Windows, compilar para **escritorio** requiere activar el Modo desarrollador.
-> Para Android no es necesario.
+> Para Android no es necesario. Si la ruta del proyecto tiene tildes, compila desde una
+> copia en ruta ASCII y copia el APK de vuelta (el AOT snapshotter de Flutter no maneja
+> bien la ruta con acentos).
